@@ -1,8 +1,8 @@
 # Player Ride Plugin
-> Allows you to ride another player in Minecraft with synchronized hearts, food, XP, and more!
+## Allows you to ride another player in Minecraft with synchronized hearts, food, XP, and more!
 ----------
-Just install the Plugin on a 1.21 Minecraft Java Server
-and run the `/rideplayer <playername>` or `/rp <playername>` command
+**Just install the Plugin on a 1.21 Minecraft Java Server
+and run the `/rideplayer <playername>` or `/rp <playername>` command**
 
 #### If you use my code please note the following rules:
 1. Attribution Requirement: Any use, distribution, or modification of this 
