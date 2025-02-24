@@ -26,15 +26,6 @@ public class SyncValuesEvents implements Listener {
     private final Set<UUID> damageSyncInProgress = new HashSet<>();
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
-        // Disable-Event
-//        if (event.getDamageSource().getDirectEntity().getType() == EntityType.PLAYER){
-//            Player attacker = (Player) event.getDamageSource().getDirectEntity();
-//            if (attacker.hasMetadata(Ride.ridden_key)){
-//                event.setCancelled(true);
-//                return;
-//            }
-//        }
-
         if (event.getEntityType() == EntityType.PLAYER) {
             Player player = (Player) event.getEntity();
             UUID playerId = player.getUniqueId();
@@ -76,18 +67,12 @@ public class SyncValuesEvents implements Listener {
             if (regainHealthSyncInProgress.contains(playerId)) {
                 return;
             }
-
             try {
                 regainHealthSyncInProgress.add(playerId);
                 Player target = Ride.getTarget(player);
                 if (target == null) return;
                 double maxHealth = target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
                 target.setHealth(Math.min(target.getHealth() + event.getAmount(), maxHealth));
-//                if (player.hasMetadata(Ride.ridden_key) ){
-//                    Player target = Ride.getTarget(Ride.riding_key, player);
-//                    double maxHealth = target.getAttribute(Attribute.GENERIC_MAX_HEALTH).getValue();
-//                    target.setHealth(Math.min(target.getHealth() + event.getAmount(), maxHealth));
-//                }
             }
             finally {
                 regainHealthSyncInProgress.remove(playerId);
@@ -113,11 +98,6 @@ public class SyncValuesEvents implements Listener {
             Player target = Ride.getTarget(player);
             if (target == null) return;
             target.setFoodLevel(event.getFoodLevel());
-
-//            if (player.hasMetadata(Ride.ridden_key)) {
-//                Player target = Ride.getTarget(Ride.riding_key, player);
-//                target.setFoodLevel(event.getFoodLevel());
-//            }
         }
     }
     @EventHandler
@@ -129,14 +109,6 @@ public class SyncValuesEvents implements Listener {
         if (target != null && target.isOnline()) {
             copyInventory(player, target);
         }
-
-//        if (player.hasMetadata(Ride.ridden_key)) {
-//            Player target = Ride.getTarget(Ride.riding_key, player);
-//
-//            if (target != null && target.isOnline()) {
-//                copyInventory(player, target);
-//            }
-//        }
     }
     private void copyInventory(Player from, Player to) {
         ItemStack[] contents = from.getInventory().getContents();
@@ -165,51 +137,13 @@ public class SyncValuesEvents implements Listener {
             if (event.getNewEffect() != null && target != null){
                 target.addPotionEffect(event.getNewEffect());
             }
-
-//            if (player.hasMetadata(Ride.riding_key)) {
-//                Player target = Ride.getTarget(Ride.ridden_key, player);
-//                if (event.getNewEffect() != null){
-//
-//                    target.addPotionEffect(event.getNewEffect());
-//                }
-//            }
         } finally {
             potionSyncInProgress.remove(playerId);
         }
     }
-
-//    private void applyPotionEffects(Player source, Player target) {
-//        if (target == null) return;
-//
-//        for (PotionEffect effect : source.getActivePotionEffects()) {
-//            PotionEffect newEffect = new PotionEffect(
-//                    effect.getType(),
-//                    effect.getDuration(),
-//                    effect.getAmplifier(),
-//                    effect.isAmbient(),
-//                    effect.hasParticles(),
-//                    effect.hasIcon()
-//            );
-//            target.addPotionEffect(newEffect, true);
-//        }
-//    }
-//    @EventHandler
-//    public void onLevelChange(PlayerLevelChangeEvent event){
-//        Player player = event.getPlayer();
-//
-//        if (player.hasMetadata(Ride.riding_key)) {
-//            Player target = Ride.getTarget(Ride.riding_key, player);
-//            target.setLevel(event.getNewLevel());
-//        }
-//
-//        if (player.hasMetadata(Ride.ridden_key)) {
-//            Player target = Ride.getTarget(Ride.ridden_key, player);
-//            target.setLevel(event.getNewLevel());
-//        }
-//    }
     @EventHandler
     public void onXPChange(PlayerExpChangeEvent event) {
-//        if (!event.getPlayer().hasMetadata(Ride.ridden_key) || !event.getPlayer().hasMetadata(Ride.riding_key)) return;
+        if (!event.getPlayer().hasMetadata(Ride.ridden_key) || !event.getPlayer().hasMetadata(Ride.riding_key)) return;
         Player target = Ride.getTarget(event.getPlayer());
         if (target == null) return;
         syncXP(event.getPlayer(), target, event);

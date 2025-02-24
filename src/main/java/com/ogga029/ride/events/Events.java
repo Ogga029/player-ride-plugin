@@ -6,12 +6,10 @@ import org.bukkit.Tag;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.event.EventHandler;
-import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.Action;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.block.BlockPlaceEvent;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDismountEvent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.PlayerDeathEvent;
@@ -122,13 +120,6 @@ public class Events implements Listener {
         Player target = Ride.getTarget(player);
         player.addPassenger(target);
         player.getWorld().setGameRule(GameRule.PLAYERS_SLEEPING_PERCENTAGE, sleepPlayerPercentage);
-
-//        if (player.hasMetadata(Ride.riding_key)) {
-//            Player target = Ride.getTarget(Ride.ridden_key, player);
-//            target.addPassenger(player);
-//            player.getWorld().setGameRule(GameRule.PLAYERS_SLEEPING_PERCENTAGE, sleepPlayerPercentage);
-//        }
-
     }
 
     @EventHandler
@@ -139,13 +130,9 @@ public class Events implements Listener {
         if (target.hasMetadata(Ride.ridden_key)){
             target.addPassenger(player);
         }
-        if (target.hasMetadata(Ride.riding_key)){
+        if (target.hasMetadata(Ride.riding_key)) {
             player.addPassenger(target);
         }
-//        if (player.hasMetadata(Ride.ridden_key)){
-//            Player target = Ride.getTarget(Ride.riding_key, player);
-//            player.addPassenger(target);
-//        }
     }
 
     @EventHandler
@@ -174,10 +161,5 @@ public class Events implements Listener {
             return;
         }
         target.addPassenger(player);
-//        if (player.hasMetadata(Ride.ridden_key)){
-//            Player target = Ride.getTarget(Ride.riding_key, player);
-//            assert target != null;
-//            player.addPassenger(target);
-//        }
     }
 }

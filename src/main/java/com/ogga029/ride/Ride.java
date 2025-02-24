@@ -5,12 +5,10 @@ import com.ogga029.ride.events.SyncValuesEvents;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import java.util.List;
 
 public final class Ride extends JavaPlugin {
     private static Ride instance;
@@ -19,8 +17,6 @@ public final class Ride extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        // Plugin startup logic
-
         instance = this;
         riding_key = getName() + ":riding";
         ridden_key = getName() + ":ridden";
@@ -32,7 +28,6 @@ public final class Ride extends JavaPlugin {
 
     @Override
     public void onDisable() {
-        // Plugin shutdown logic
     }
 
     public static Ride getInstance() {
