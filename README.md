@@ -13,3 +13,5 @@ and run the `/rideplayer <playername>` or `/rp <playername>` command**
 > - This permission notice shall be included in all copies or substantial
 >   portions of the Software.
 >   [Read more about the LICENSE](LICENSE)
+----------
+Please post tips and suggestions for improvement etc. in the issues-tab.
